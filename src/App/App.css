@@ -100,3 +100,37 @@ span.red {
   font-size: 30px;
   padding: 0;
 }
+.canvas {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.canvas-column {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 40px;
+}
+
+canvas {
+  border: 1px solid #222;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.canvas-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+}
+
+.canvas-buttons button {
+  width: 40%;
+}
+
+.prediction-column {
+  font-size: 200px;
+}

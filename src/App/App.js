@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import './App.css';
 import Papa from 'papaparse'
+import CanvasDraw from "react-canvas-draw";
 
 class App extends Component {
   constructor(props){
@@ -16,7 +17,8 @@ class App extends Component {
       numberOfTestData: 0,
       testData: [],
       testLabels: [],
-      step:0
+      step:0,
+      predictionNumber: null
     }
   }
 
@@ -222,6 +224,44 @@ class App extends Component {
     })
   }
 
+  _clearCanvas = () => {
+    this.canvas.clear()
+  }
+
+  _predictCanvas = async () => {
+    const canvasData = this.canvas.getSaveData();
+    let imageData = [];
+    for (let indexX = 0; indexX < 28; indexX++) {
+      imageData[indexX] = []
+      for (let indexY = 0; indexY < 28; indexY++) {
+        imageData[indexX][indexY] = 0
+      }
+    }
+
+    await JSON.parse(canvasData).linesArray.forEach(item => {
+      imageData[parseInt(item.startX / 10)][parseInt(item.startY / 10)] = 255
+    })
+    
+    let newFlatInputData = []
+
+    for (let indexX = 0; indexX < 28; indexX++) {
+      for (let indexY = 0; indexY < 28; indexY++) {
+        newFlatInputData.push(imageData[indexX][indexY])
+      }
+    }
+    
+    const imagesShape = [1, 28, 28, 1];
+
+    const inputs = tf.tensor4d(newFlatInputData, imagesShape)
+
+   const output = this.minstModel.predict(inputs);
+   const prediction = output.argMax(1).dataSync();
+   console.log('canvas prediction', prediction[0])
+   this.setState({
+     predictionNumber: prediction[0]
+   })
+  }
+
 
   render() {
     const { status, accuracy } = this.state
@@ -335,12 +375,12 @@ class App extends Component {
                 }
                 <br />
                { status === 7 &&
-                  <span>
+                  <span className="red">
                     Predicting
                   </span>
                 }
                 { status > 7 &&
-                  <span>
+                  <span className="green">
                     Predicted
                   </span>
                 }                
@@ -351,7 +391,36 @@ class App extends Component {
                 Accuracy : {accuracy}%
               </div>
             }
-            <br />
+            { status > 5 &&
+              <div className="section">
+                <div className="canvas">
+                  <div className="canvas-column">
+                    <div className="canvas-canvas">
+                      <CanvasDraw 
+                        ref={e => this.canvas = e}
+                        brushSize={10}
+                        brushColor={"#444"}
+                        canvasWidth={280}
+                        canvasHeight={280}
+                      />
+                    </div>
+                    <div className="canvas-buttons">
+                      <button onClick={this._clearCanvas}>
+                        Clear
+                      </button>
+                      <button onClick={this._predictCanvas}>
+                        Predict
+                      </button>
+                    </div>
+                  </div>
+                  <div className="canvas-column">
+                    <div className="prediction-column">
+                      {this.state.predictionNumber}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
             { status > 7 &&
               <div className="section">
                 <h1>
@@ -396,12 +465,12 @@ class App extends Component {
                 }
                 <br />
                { status === 11 &&
-                  <span>
+                  <span className="red">
                     Predicting
                   </span>
                 }
                 { status > 11 &&
-                  <span>
+                  <span className="green">
                     Predicted and prediction is in Console
                   </span>
                 }
