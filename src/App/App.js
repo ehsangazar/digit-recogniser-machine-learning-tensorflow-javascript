@@ -9,7 +9,7 @@ class App extends Component {
     super(props)
     this.minstModel = null
     this.state = {
-      batchSize: 100,
+      batchSize: 10,
       status: 0,
       numberOfTrainingData: 0,
       trainingData: [],
@@ -128,7 +128,7 @@ class App extends Component {
         activation: 'softmax'
       }));
   
-      const LEARNING_RATE = 0.01;
+      const LEARNING_RATE = 0.0001;
       const optimizer = tf.train.sgd(LEARNING_RATE);
       this.minstModel.compile({
         optimizer: optimizer,
@@ -148,7 +148,8 @@ class App extends Component {
     const numberOfSteps = numberOfTrainingData / batchSize - 1
     console.log('Training is about to Start')
     await this.setState({
-      status: this.state.status + 1
+      status: this.state.status + 1,
+      step: 0,
     }, async () => {
       await setTimeout(async ()=>{
         for (let step = 0; step < numberOfSteps; step++) {
@@ -339,7 +340,7 @@ class App extends Component {
                 <p>
                   This might take a while to be completed 
                   <br />
-                  our learning rate is 0.01 and you can see the log in Inspect Element
+                  our learning rate is 0.0001 and you can see the log in Inspect Element
                 </p>
                 { status === 4 &&
                   <button onClick={this._trainNewModel}>
@@ -398,7 +399,7 @@ class App extends Component {
                     <div className="canvas-canvas">
                       <CanvasDraw 
                         ref={e => this.canvas = e}
-                        brushSize={10}
+                        brushSize={50}
                         brushColor={"#444"}
                         canvasWidth={280}
                         canvasHeight={280}

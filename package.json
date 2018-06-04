@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "PUBLIC_URL=https://ehsangazar.github.io/digit-recogniser-machine-learning-tensorflow-javascript node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "dependencies": {
