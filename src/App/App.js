@@ -31,7 +31,7 @@ class App extends Component {
     this.setState({
       status: this.state.status + 1,
     }, async () => {
-      await Papa.parse('/train.csv', {
+      await Papa.parse('https://ehsangazar.github.io/digit-recogniser-machine-learning-tensorflow-javascript/train.csv', {
         download: true,
         complete: async (results) => {
           const newResults = await results.data.slice(1, results.datalength);
@@ -53,7 +53,7 @@ class App extends Component {
     this.setState({
       status: this.state.status + 1,
     }, async () => {
-      await Papa.parse('/test.csv', {
+      await Papa.parse('https://ehsangazar.github.io/digit-recogniser-machine-learning-tensorflow-javascript/test.csv', {
         download: true,
         complete: async (results) => {
           const newResults = await results.data.slice(1, results.datalength);
