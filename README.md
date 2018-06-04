@@ -4,7 +4,7 @@ This project is a simple implemntation of digit recongition using tensorflow js.
 
 If you want to to have sample data, you can use kaggle website.
 
-Demo Link: [Here](https://ehsangazar.github.io/digit-recogniser-machine-learning-tensorflow-javascript)
+Demo Link: [Here](https://ehsangazar.github.io/digit-recogniser-machine-learning-tensorflow-javascript/)
 
 
 ## Functions and Steps
