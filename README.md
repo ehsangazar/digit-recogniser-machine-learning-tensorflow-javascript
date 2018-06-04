@@ -1,4 +1,4 @@
-# digit-recogniser-machine-learning-tensorflow-javascript
+# Digit Recogniser Machine Learning Tensorflow Javascript And React
 
 This project is a simple implemntation of digit recongition using tensorflow js.
 
