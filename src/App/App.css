@@ -41,3 +41,62 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.section {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  border-bottom: 1px solid #999;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+h1 {
+  text-align: left;
+  font-size: 26px;
+}
+
+button {
+  border: 1px solid #222;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0px 1px 2px #222;
+}
+
+p {
+  text-align: left;
+  font-size: 16px;
+  color: #222;
+  margin-left: 20px;
+}
+
+span {
+  position: absolute;
+  right: 0px;
+  bottom: 25px;
+}
+
+span.green {
+  color: rgb(11, 168, 11);
+}
+
+span.red {
+  color: rgb(194, 3, 45);
+}
+
+.result {
+  background-color: rgb(10, 0, 97);
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 30px;
+  padding: 0;
+}
